@@ -34,7 +34,7 @@ public class StudentService implements IStudentService {
             toUpdatedStudent.setEmail(student.getEmail());
             toUpdatedStudent.setGender(student.getGender());
             toUpdatedStudent.setFirstName(student.getFirstName());
-            toUpdatedStudent.setFirstName(student.getLastName());
+            toUpdatedStudent.setLastName(student.getLastName());
             return studentRepository.save(toUpdatedStudent);
         }
         throw new Exception("Student does not exist");
@@ -43,6 +43,11 @@ public class StudentService implements IStudentService {
     @Override
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
+    }
+
+    @Override
+    public Student findById(Long id) {
+        return studentRepository.findById(id).get();
     }
 
 

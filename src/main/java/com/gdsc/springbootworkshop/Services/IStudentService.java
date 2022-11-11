@@ -11,6 +11,5 @@ public interface IStudentService {
     Student addStudent(Student student)  throws Exception ;
     Student updateStudent(Long id,Student student) throws Exception ;
     void deleteStudent(Long id);
-
-
+    Student findById(Long id);
 }
