@@ -43,5 +43,10 @@ public class ClassroomController {
         return classroomService.findById(id);
     }
 
+    @GetMapping("findStudentsByClassroomName/{name}")
+    public List<Student> getStudentsByClassroomName(@PathVariable("name") String name) {
+        return classroomService.getStudentsByClassroomName(name);
+    }
+
 
 }

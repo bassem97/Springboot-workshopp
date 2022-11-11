@@ -4,6 +4,7 @@ package com.gdsc.springbootworkshop.Services.Classroom;
 import com.gdsc.springbootworkshop.Services.Classroom.IClassroomService;
 import com.gdsc.springbootworkshop.Services.ICrudservice;
 import com.gdsc.springbootworkshop.entities.Classroom;
+import com.gdsc.springbootworkshop.entities.Student;
 import com.gdsc.springbootworkshop.repositories.ClassroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,17 @@ public class ClassroomService implements IClassroomService, ICrudservice<Classro
     @Override
     public Classroom findById(Long aLong) {
         return classroomRepository.findById(aLong).get();
+    }
+
+    @Override
+    public List<Student> getStudentsByClassroomName(String name) {
+        return classroomRepository.getStudentsByClassroomName(name);
+//        return classroomRepository.findAll()
+//                .stream()
+//                .filter(classroom -> classroom.getName().equals(name))
+//                .findFirst()
+//                .get()
+//                .getStudents();
     }
 
 

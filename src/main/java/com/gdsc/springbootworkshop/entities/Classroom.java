@@ -10,6 +10,7 @@ import java.util.List;
 @Getter @Setter @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Classroom implements Serializable {
 
     @Id
