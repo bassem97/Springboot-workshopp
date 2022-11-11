@@ -21,8 +21,7 @@ public class Student implements Serializable {
     @Column(unique = true)
     private String email;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private GENDER gender;
-
 
 }
