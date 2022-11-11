@@ -1,5 +1,7 @@
 package com.gdsc.springbootworkshop.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,5 +25,10 @@ public class Student implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private GENDER gender;
+
+    @ManyToOne()
+    @JoinColumn(name = "idClassroom")
+    @JsonIgnoreProperties({"students"})
+    Classroom classroom;
 
 }

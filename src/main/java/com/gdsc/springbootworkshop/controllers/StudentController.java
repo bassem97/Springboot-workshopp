@@ -1,6 +1,7 @@
 package com.gdsc.springbootworkshop.controllers;
 
-import com.gdsc.springbootworkshop.Services.IStudentService;
+import com.gdsc.springbootworkshop.Services.Student.IStudentService;
+import com.gdsc.springbootworkshop.Services.Student.StudentService;
 import com.gdsc.springbootworkshop.entities.Student;
 import com.gdsc.springbootworkshop.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +14,27 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    IStudentService studentService;
-
-    @Autowired
-    StudentRepository studentRepository;
+    StudentService studentService;
 
 
     @GetMapping("")
     List<Student> findAllStudents(){
-        return studentService.getAllStudents();
+        return studentService.getAll() ;
     }
 
     @PostMapping("")
     Student addStudent(@RequestBody Student student) throws Exception {
-        return studentService.addStudent(student);
+        return studentService.add(student);
     }
 
     @PutMapping("/{id}")
     Student updateStudent(@PathVariable("id") Long id,@RequestBody  Student student) throws Exception {
-        return studentService.updateStudent(id,student);
+        return studentService.update(id,student);
     }
 
     @DeleteMapping("/{id}")
     void deleteStudent(@PathVariable("id") Long id){
-        studentService.deleteStudent(id);
+        studentService.delete(id);
     }
 
     @GetMapping("/{id}")
