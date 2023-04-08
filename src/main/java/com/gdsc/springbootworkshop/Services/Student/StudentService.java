@@ -54,24 +54,21 @@ public class StudentService implements ICrudservice<Student,Long>,  IStudentServ
     }
 
     @Override
+    public List<AttributeType> getFields(Student student) {
+        return Arrays
+                .stream(student.getClass().getDeclaredFields())
+                .map(field -> new AttributeType(field.getName(),field.getType().getSimpleName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Student findById(Long aLong) {
         return studentRepository.findById(aLong).get();
     }
 
     @Override
     public List<AttributeType> getStudentFields() {
-        // return an object array of the fields of the student class with their types
-        /**
-         * TODO: make it dynamic
-         */
-
-        return Arrays.stream(Student.class.getDeclaredFields()).map(field -> {
-            AttributeType attributeType = new AttributeType();
-            attributeType.setName(field.getName());
-            attributeType.setType(field.getType().getSimpleName());
-            return attributeType;
-        }).collect(Collectors.toList());
+        return null;
     }
-
 
 }

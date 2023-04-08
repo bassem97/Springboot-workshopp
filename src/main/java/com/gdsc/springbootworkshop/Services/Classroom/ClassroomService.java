@@ -52,6 +52,14 @@ public class ClassroomService implements IClassroomService, ICrudservice<Classro
     }
 
     @Override
+    public List<AttributeType> getFields(Classroom classroom) {
+        return Arrays
+                .stream(classroom.getClass().getDeclaredFields())
+                .map(field -> new AttributeType(field.getName(),field.getType().getSimpleName()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Classroom findById(Long aLong) {
         return classroomRepository.findById(aLong).get();
     }
@@ -67,13 +75,6 @@ public class ClassroomService implements IClassroomService, ICrudservice<Classro
 //                .getStudents();
     }
 
-    @Override
-    public List<AttributeType> getFields() {
-
-        return Arrays.stream(Classroom.class.getDeclaredFields())
-                .map(field -> new AttributeType(field.getName(), field.getType().getSimpleName()))
-                .collect(Collectors.toList() );
-    }
 
 
 }

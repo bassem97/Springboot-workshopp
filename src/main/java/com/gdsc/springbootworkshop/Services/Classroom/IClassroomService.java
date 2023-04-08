@@ -10,6 +10,4 @@ import java.util.List;
 public interface IClassroomService {
         Classroom findById(Long id) ;
         List<Student> getStudentsByClassroomName(String name) ;
-
-        List<AttributeType> getFields();
 }
