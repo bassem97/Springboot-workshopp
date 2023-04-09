@@ -6,10 +6,13 @@ import com.gdsc.springbootworkshop.Services.ICrudservice;
 import com.gdsc.springbootworkshop.entities.Classroom;
 import com.gdsc.springbootworkshop.entities.Student;
 import com.gdsc.springbootworkshop.repositories.ClassroomRepository;
+import com.gdsc.springbootworkshop.utils.AttributeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClassroomService implements IClassroomService, ICrudservice<Classroom,Long> {
@@ -62,6 +65,14 @@ public class ClassroomService implements IClassroomService, ICrudservice<Classro
 //                .findFirst()
 //                .get()
 //                .getStudents();
+    }
+
+    @Override
+    public List<AttributeType> getFields() {
+
+        return Arrays.stream(Classroom.class.getDeclaredFields())
+                .map(field -> new AttributeType(field.getName(), field.getType().getSimpleName()))
+                .collect(Collectors.toList() );
     }
 
 
