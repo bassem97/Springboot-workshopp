@@ -3,10 +3,13 @@ package com.gdsc.springbootworkshop.Services.Student;
 import com.gdsc.springbootworkshop.Services.ICrudservice;
 import com.gdsc.springbootworkshop.entities.Student;
 import com.gdsc.springbootworkshop.repositories.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gdsc.springbootworkshop.utils.AttributeType;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService implements ICrudservice<Student,Long>,  IStudentService {
@@ -55,12 +58,20 @@ public class StudentService implements ICrudservice<Student,Long>,  IStudentServ
         return studentRepository.findById(aLong).get();
     }
 
+    @Override
+    public List<AttributeType> getStudentFields() {
+        // return an object array of the fields of the student class with their types
+        /**
+         * TODO: make it dynamic
+         */
 
-
-
-
-
-
+        return Arrays.stream(Student.class.getDeclaredFields()).map(field -> {
+            AttributeType attributeType = new AttributeType();
+            attributeType.setName(field.getName());
+            attributeType.setType(field.getType().getSimpleName());
+            return attributeType;
+        }).collect(Collectors.toList());
+    }
 
 
 }
