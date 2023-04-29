@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class ClassroomService implements IClassroomService, ICrudservice<Classroom,Long> {
 
-    @Autowired
+    final
     ClassroomRepository classroomRepository;
+
+    public ClassroomService(ClassroomRepository classroomRepository) {
+        this.classroomRepository = classroomRepository;
+    }
 
     @Override
     public List<Classroom> getAll() {

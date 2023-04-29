@@ -15,13 +15,16 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
 
-    @Autowired
+    final
     StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
 
     @GetMapping("")
     ResponseEntity<Response<Student>> findAllStudents(){
-
         try {
             return ResponseEntity.ok().body(new Response<Student>(true, HttpStatus.OK.value(), "Students retrieved successfully", studentService.getAll()));
         } catch (Exception e) {
@@ -30,23 +33,40 @@ public class StudentController {
     }
 
     @PostMapping("")
-    Student addStudent(@RequestBody Student student) throws Exception {
-        return studentService.add(student);
+    ResponseEntity<Response<Student>> addStudent(@RequestBody Student student) throws Exception {
+        try {
+            return ResponseEntity.ok().body(new Response<Student>(true, HttpStatus.OK.value(), "Student added successfully", List.of(studentService.add(student))));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new Response<Student>(false, HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
+        }
     }
 
     @PutMapping("/{id}")
-    Student updateStudent(@PathVariable("id") Long id,@RequestBody  Student student) throws Exception {
-        return studentService.update(id,student);
+    ResponseEntity<Response<Student>> updateStudent(@PathVariable("id") Long id,@RequestBody Student student) throws Exception {
+        try {
+            return ResponseEntity.ok().body(new Response<Student>(true, HttpStatus.OK.value(), "Student updated successfully", List.of(studentService.update(id,student))));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new Response<Student>(false, HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
+        }
     }
 
     @DeleteMapping("/{id}")
-    void deleteStudent(@PathVariable("id") Long id){
-        studentService.delete(id);
+    ResponseEntity<Response<Student>> deleteStudent(@PathVariable("id") Long id){
+        try {
+            studentService.delete(id);
+            return ResponseEntity.ok().body(new Response<Student>(true, HttpStatus.OK.value(), "Student deleted successfully", null));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new Response<Student>(false, HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
+        }
     }
 
     @GetMapping("/{id}")
-    Student findById(@PathVariable("id") Long id){
-        return studentService.findById(id);
+    ResponseEntity<Response<Student>> findById(@PathVariable("id") Long id){
+        try {
+            return ResponseEntity.ok().body(new Response<Student>(true, HttpStatus.OK.value(), "Student retrieved successfully", List.of(studentService.findById(id))));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new Response<Student>(false, HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
+        }
     }
 
 

@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class StudentService implements ICrudservice<Student,Long>,  IStudentService {
 
-    @Autowired
+    final
     StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
 
     @Override

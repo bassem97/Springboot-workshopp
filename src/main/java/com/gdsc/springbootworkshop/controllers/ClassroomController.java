@@ -15,8 +15,12 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClassroomController {
 
-    @Autowired
+    final
     ClassroomService classroomService;
+
+    public ClassroomController(ClassroomService classroomService) {
+        this.classroomService = classroomService;
+    }
 
 
     @GetMapping("")
