@@ -1,10 +1,11 @@
 package com.gdsc.springbootworkshop.controllers;
 
-import com.gdsc.springbootworkshop.Services.Student.IStudentService;
 import com.gdsc.springbootworkshop.Services.Student.StudentService;
 import com.gdsc.springbootworkshop.entities.Student;
-import com.gdsc.springbootworkshop.repositories.StudentRepository;
+import com.gdsc.springbootworkshop.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +20,13 @@ public class StudentController {
 
 
     @GetMapping("")
-    List<Student> findAllStudents(){
-        return studentService.getAll() ;
+    ResponseEntity<Response<Student>> findAllStudents(){
+
+        try {
+            return ResponseEntity.ok().body(new Response<Student>(true, HttpStatus.OK.value(), "Students retrieved successfully", studentService.getAll()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new Response<Student>(false, HttpStatus.BAD_REQUEST.value(), e.getMessage(), null));
+        }
     }
 
     @PostMapping("")

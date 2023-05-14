@@ -9,7 +9,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @lombok.Data
-public class ResponseBody<T> {
+public class Response<T> {
 
     @JsonProperty("success")
     private boolean success;
@@ -18,5 +18,18 @@ public class ResponseBody<T> {
     private String message;
 
     @JsonProperty("data")
-    private List<T> data;
+    private List<T> list;
+
+    private int status;
+
+//    timestamp
+    private long timestamp;
+
+    public Response(boolean success,int status, String message, List<T> list) {
+        this.success = success;
+        this.message = message;
+        this.list = list;
+        this.status = status;
+        this.timestamp = System.currentTimeMillis();
+    }
 }
