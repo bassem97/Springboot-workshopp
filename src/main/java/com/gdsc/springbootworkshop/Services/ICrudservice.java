@@ -9,5 +9,5 @@ public interface ICrudservice<Class, TypeId> {
   Class update(TypeId typeId, Class class1) throws Exception;
   void delete(TypeId typeId);
 
-  List<AttributeType> getFields(Class class1);
+  List<AttributeType> getFields();
 }

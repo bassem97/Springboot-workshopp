@@ -50,9 +50,9 @@ public class ClassroomService
   }
 
   @Override
-  public List<AttributeType> getFields(Classroom classroom) {
+  public List<AttributeType> getFields() {
     return Arrays
-      .stream(classroom.getClass().getDeclaredFields())
+      .stream(Classroom.class.getDeclaredFields())
       .map(
         field ->
           new AttributeType(field.getName(), field.getType().getSimpleName())

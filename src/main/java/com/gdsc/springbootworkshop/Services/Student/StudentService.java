@@ -52,9 +52,9 @@ public class StudentService
   }
 
   @Override
-  public List<AttributeType> getFields(Student student) {
+  public List<AttributeType> getFields() {
     return Arrays
-      .stream(student.getClass().getDeclaredFields())
+      .stream(Student.class.getDeclaredFields())
       .map(
         field ->
           new AttributeType(field.getName(), field.getType().getSimpleName())
